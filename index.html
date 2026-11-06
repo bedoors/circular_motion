@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Circular Motion – Simulations</title>
+<title>Chapter 8 Dynamics II: Motion in a Plane – Simulations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
@@ -75,7 +75,10 @@ sub,sup{font-size:.66em;line-height:0;font-family:var(--font);font-style:normal}
 .app.compact{grid-template-columns:3.7rem minmax(0,1fr)}
 .toc{background:var(--nav);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;overflow-y:auto;z-index:20}
 .toc-brand{padding:1.1rem .9rem .5rem 1rem}
-.toc-brand h1{margin:0;font-family:var(--math);font-weight:600;font-size:1.35rem;line-height:1.15;letter-spacing:-.005em}
+.toc-brand h1{margin:0;font-family:var(--math);font-weight:600;font-size:1.25rem;line-height:1.18;letter-spacing:-.005em}
+/* the chapter number on its own line above the chapter title; one line in the top bar on smaller screens */
+.toc-brand h1 .ch{display:block;font-size:.78em;font-weight:400;color:var(--muted);margin-bottom:.18em}
+.toc-brand h1 .ln{display:block}
 .tabs{display:flex;flex-direction:column;gap:2px;padding:.35rem .45rem}
 .tab{display:flex;gap:.55rem;align-items:baseline;width:100%;text-align:left;border:0;background:transparent;color:var(--ink);font-size:.86rem;padding:.42rem .55rem;border-radius:.45rem;cursor:pointer;line-height:1.25}
 .tab b{font-variant-numeric:tabular-nums;color:var(--muted);min-width:1.4em;text-align:right;flex:none;font-weight:600}
@@ -105,6 +108,7 @@ sub,sup{font-size:.66em;line-height:0;font-family:var(--font);font-style:normal}
   .toc{flex-direction:row;flex-wrap:wrap;align-items:center;gap:.4rem 1rem;padding:.5rem 1rem;border-right:0;border-bottom:1px solid var(--line);overflow:visible}
   .toc-brand,.app.compact .toc-brand{display:block;padding:0}
   .toc-brand h1{font-size:1.2rem;white-space:nowrap}
+  .toc-brand h1 .ch,.toc-brand h1 .ln{display:inline}
   .toc-foot,.app.compact .toc-foot{order:2;margin:0 0 0 auto;padding:0;flex-direction:row}
   .tools,.app.compact .tools{display:flex;gap:.35rem}
   .app.compact .tool{min-width:2.3rem;height:2.2rem}
@@ -114,6 +118,7 @@ sub,sup{font-size:.66em;line-height:0;font-family:var(--font);font-style:normal}
   .app.compact .tab .t{display:inline}
 }
 @media (max-width:899px){.toc{position:sticky;top:env(safe-area-inset-top,0px)}}
+@media (max-width:640px){.toc-brand h1{white-space:normal}}
 /* views */
 main{flex:1;display:flex;flex-direction:column;min-height:0}
 .tabpanel{flex:1;display:flex;flex-direction:column;min-height:0;padding:.75rem 1rem 1rem}
@@ -215,8 +220,8 @@ table.mini th:first-child,table.mini td:first-child{text-align:left}
 </head>
 <body>
 <div class="app" id="app">
-<nav class="toc" aria-label="Circular motion topics">
-  <div class="toc-brand"><h1>Circular Motion</h1></div>
+<nav class="toc" aria-label="Chapter 8 topics">
+  <div class="toc-brand"><h1><span class="ch">Chapter 8</span> <span class="ln">Dynamics II:</span> <span class="ln">Motion in a Plane</span></h1></div>
   <div class="tabs" role="tablist" aria-orientation="vertical" aria-label="Topics">
     <button class="tab" role="tab" data-view="uniform-motion"><b>1</b><span class="t">Uniform motion</span></button>
     <button class="tab" role="tab" data-view="conical-pendulum"><b>2</b><span class="t">Conical pendulum</span></button>
@@ -228,9 +233,11 @@ table.mini th:first-child,table.mini td:first-child{text-align:left}
     <button class="tab" role="tab" data-view="vertical-circle"><b>8</b><span class="t">Ball on a cord</span></button>
     <button class="tab" role="tab" data-view="train"><b>9</b><span class="t">Accelerating train</span></button>
     <button class="tab" role="tab" data-view="turning-car"><b>10</b><span class="t">Turning car</span></button>
-    <button class="tab" role="tab" data-view="gravitation"><b>11</b><span class="t">Universal gravitation</span></button>
-    <button class="tab" role="tab" data-view="orbits"><b>12</b><span class="t">Orbits</span></button>
-    <button class="tab" role="tab" data-view="kepler"><b>13</b><span class="t">Kepler’s laws</span></button>
+    <button class="tab" role="tab" data-view="coriolis"><b>11</b><span class="t">Coriolis force</span></button>
+    <button class="tab" role="tab" data-view="hanging-ball"><b>12</b><span class="t">Ball in a truck</span></button>
+    <button class="tab" role="tab" data-view="gravitation"><b>13</b><span class="t">Universal gravitation</span></button>
+    <button class="tab" role="tab" data-view="orbits"><b>14</b><span class="t">Orbits</span></button>
+    <button class="tab" role="tab" data-view="kepler"><b>15</b><span class="t">Kepler’s laws</span></button>
   </div>
   <div class="toc-foot">
     <div class="tools">
@@ -442,6 +449,46 @@ table.mini th:first-child,table.mini td:first-child{text-align:left}
 </section>
 
 <!-- 11 -->
+<section class="tabpanel" id="view-coriolis" data-view="coriolis" role="tabpanel" hidden>
+  <div class="head"><h2>Fictitious forces: the Coriolis force</h2>
+    <p>You and a friend stand on opposite sides of a rotating platform, and you throw a ball to your friend. Compare the view from above with your friend’s view.</p></div>
+  <div class="stage">
+    <div class="view"><canvas aria-label="A ball thrown across a rotating platform, seen from above and from the platform"></canvas></div>
+    <aside class="side">
+      <div class="grp"><h3>The platform turns (seen from above)</h3>
+        <div class="seg" data-seg="dir" style="--cols:2"><button data-v="cw" aria-pressed="true">Clockwise</button><button data-v="ccw" aria-pressed="false">Counterclockwise</button></div></div>
+      <div class="grp">
+        <label class="ctl"><span class="ctl-top"><span>Angular speed <i>ω</i></span><output data-o="w"></output></span><input type="range" data-r="w" min="0" max="0.8" step="0.02" value="0.5"></label>
+        <label class="ctl"><span class="ctl-top"><span>Ball’s speed <i>v</i> (seen from above)</span><output data-o="v"></output></span><input type="range" data-r="v" min="3" max="12" step="0.1" value="5"></label>
+        <label class="ctl"><span class="ctl-top"><span>Ball’s mass <i>m</i></span><output data-o="m"></output></span><input type="range" data-r="m" min="0.05" max="0.5" step="0.01" value="0.15"></label>
+        <button class="btn primary" data-act="throw" style="width:100%">Throw again</button>
+        <button class="btn" data-act="cf" aria-pressed="false" style="margin-top:.5rem;width:100%">Also show the centrifugal force</button></div>
+      <div class="grp read" data-out="read"></div>
+      <div class="key"><p class="eqn"><i>F</i><sub>Coriolis</sub> = 2<i>mωv</i>′</p><p>It acts only on an object moving across the platform (<i>v</i>′ is its speed there) and pushes sideways, at right angles to that motion. Fictitious forces can have real effects: the Coriolis force due to Earth’s rotation sets hurricanes spinning and steers large ocean currents.</p></div>
+    </aside>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="tabpanel" id="view-hanging-ball" data-view="hanging-ball" role="tabpanel" hidden>
+  <div class="head"><h2>Fictitious forces in linear motion</h2>
+    <p>A ball hangs from the ceiling of a truck that is speeding up. Both observers agree on the angle <i>θ</i> of the string, but they explain it differently.</p></div>
+  <div class="stage">
+    <div class="view"><canvas aria-label="A truck speeding up with a ball hanging from its ceiling, and the forces on the ball"></canvas></div>
+    <aside class="side">
+      <div class="grp"><h3>Who is watching?</h3>
+        <div class="seg" data-seg="obs" style="--cols:2"><button data-v="ground" aria-pressed="true">From the ground</button><button data-v="truck" aria-pressed="false">From the truck</button></div></div>
+      <div class="grp">
+        <label class="ctl"><span class="ctl-top"><span>Truck’s acceleration <i>a</i></span><output data-o="a"></output></span><input type="range" data-r="a" min="0" max="10" step="0.1" value="4"></label>
+        <label class="ctl"><span class="ctl-top"><span>Ball’s mass <i>m</i></span><output data-o="m"></output></span><input type="range" data-r="m" min="0.05" max="1" step="0.01" value="0.2"></label>
+        <button class="btn primary" data-act="replay" style="width:100%">Start the truck again</button></div>
+      <div class="grp read" data-out="read"></div>
+      <div class="key"><p class="eqn"><i>F</i><sub>fictitious</sub> = <i>m a</i></p><p class="eqn"><i>a</i> = <i>g</i> tan <i>θ</i></p><p>Both observers measure the same angle, so measuring <i>θ</i> gives the acceleration: a hanging ball is an accelerometer.</p></div>
+    </aside>
+  </div>
+</section>
+
+<!-- 13 -->
 <section class="tabpanel" id="view-gravitation" data-view="gravitation" role="tabpanel" hidden>
   <div class="head"><h2>Newton’s law of universal gravitation</h2>
     <p>Any two masses pull on each other. The force grows with each mass and falls off with the square of the distance between their centers.</p></div>
@@ -456,14 +503,14 @@ table.mini th:first-child,table.mini td:first-child{text-align:left}
         <label class="ctl"><span class="ctl-top"><span>Distance <span class="c-r"><i>r</i></span> between centers</span><output data-o="r"></output></span><input type="range" data-r="r" min="0.5" max="3" step="0.01" value="1"></label></div>
       <div class="grp read" data-out="read"></div>
       <div class="key"><p>Size of each force:</p>
-        <p class="eqn"><span class="c-g"><i>F</i><sub>1&nbsp;on&nbsp;2</sub></span> = <span class="c-g"><i>F</i><sub>2&nbsp;on&nbsp;1</sub></span> = <i>G</i> <span class="frac"><span><span class="c-m1"><i>m</i><sub>1</sub></span><span class="c-m2"><i>m</i><sub>2</sub></span></span><span><span class="c-r"><i>r</i></span>²</span></span></p>
-        <p>Each mass pulls the other toward its center, and <span class="c-r"><i>r</i></span> is measured center to center. The two forces are a third-law pair, equal in size and opposite in direction: <span style="white-space:nowrap"><span class="c-g"><span class="v">F</span><sub>1&nbsp;on&nbsp;2</sub></span> = −<span class="c-g"><span class="v">F</span><sub>2&nbsp;on&nbsp;1</sub></span>.</span></p>
+        <p class="eqn"><span class="c-g"><i>F</i><sub data-on="2">1&nbsp;on&nbsp;2</sub></span> = <span class="c-g"><i>F</i><sub data-on="1">2&nbsp;on&nbsp;1</sub></span> = <i>G</i> <span class="frac"><span><span class="c-m1"><i>m</i><sub>1</sub></span><span class="c-m2"><i>m</i><sub>2</sub></span></span><span><span class="c-r"><i>r</i></span>²</span></span></p>
+        <p><span data-read>Read <span style="white-space:nowrap"><span class="c-g"><span class="v">F</span><sub>1&nbsp;on&nbsp;2</sub></span></span> as “the force of ball 1 on ball 2.”</span> Each mass pulls the other toward its center, and <span class="c-r"><i>r</i></span> is measured center to center. The two forces are a third-law pair, equal in size and opposite in direction: <span style="white-space:nowrap"><span class="c-g"><span class="v">F</span><sub data-on="2">1&nbsp;on&nbsp;2</sub></span> = −<span class="c-g"><span class="v">F</span><sub data-on="1">2&nbsp;on&nbsp;1</sub></span>.</span></p>
         <p><i>G</i> = 6.67 × 10⁻¹¹ N·m²/kg², the same everywhere in the universe. Double <span class="c-m1"><i>m</i><sub>1</sub></span> or <span class="c-m2"><i>m</i><sub>2</sub></span> and the force doubles. Double <span class="c-r"><i>r</i></span> and it drops to <span class="frac"><span>1</span><span>4</span></span>.</p></div>
     </aside>
   </div>
 </section>
 
-<!-- 12 -->
+<!-- 14 -->
 <section class="tabpanel" id="view-orbits" data-view="orbits" role="tabpanel" hidden>
   <div class="head"><h2>Circular orbits</h2>
     <p>Launch fast enough and a projectile falls around Earth instead of into it.</p></div>
@@ -479,7 +526,7 @@ table.mini th:first-child,table.mini td:first-child{text-align:left}
   </div>
 </section>
 
-<!-- 13 -->
+<!-- 15 -->
 <section class="tabpanel" id="view-kepler" data-view="kepler" role="tabpanel" hidden>
   <div class="head"><h2>Kepler’s laws of planetary motion</h2>
     <p>Three rules describe how planets move around the Sun. Newton showed that all three follow from his law of universal gravitation.</p>
@@ -767,7 +814,7 @@ function labeler(bounds) {
       }
       return out;
     },
-    pick(w, h, spots) { // spots: label centers, best first; returns the chosen center
+    test(w, h, spots) { // spots: label centers, best first; returns the best center and its cost, without booking it
       w += 4; h += 4; // a little air around every label
       const s0 = spots[0]; let best = s0, bestS = Infinity;
       for (const c of spots) {
@@ -778,9 +825,10 @@ function labeler(bounds) {
         for (const o of obs) { if (sc >= bestS) break; const q = o.bb; if (q[0] < x1 && q[2] > x0 && q[1] < y1 && q[3] > y0 && hit(R, o.P)) sc += o.wt; }
         if (sc < bestS) { bestS = sc; best = c; if (sc === 0) break; }
       }
-      add(quad(best[0] - w / 2, best[1] - h / 2, w, h), 3);
-      return best;
-    }
+      return { c: best, s: bestS };
+    },
+    book(c, w, h) { w += 4; h += 4; add(quad(c[0] - w / 2, c[1] - h / 2, w, h), 3); return c; },
+    pick(w, h, spots) { return api.book(api.test(w, h, spots).c, w, h); } // returns the chosen center
   };
   return api;
 }
@@ -1258,7 +1306,7 @@ function curveSim(name, banked) {
   }
   const CG = 0.38; // height of the car's center (where its forces act), as a fraction of its width
   const CAR = [[-50, 0], [50, 0], [50, -47], [31, -78], [-31, -78], [-50, -47]]; // outline, for keeping labels off the car
-  function rearCar(ctx, x, y, ang, cw, pale) { // the car seen from behind; pale: very light, outlined, no red (tab 4)
+  function rearCar(ctx, x, y, ang, cw, pale) { // the car seen from behind; pale: very light, outlined, no red (tabs 4 and 5)
     const u = cw / 100;
     if (pale) {
       const ln = C.carLine, out = () => { ctx.strokeStyle = ln; ctx.lineWidth = 1.6 / u; ctx.stroke(); };
@@ -1330,7 +1378,7 @@ function curveSim(name, banked) {
       ang = { ax, ay };
     }
     const cw = Math.min(B.w * 0.3, fs * 6, B.h * 0.34);
-    rearCar(ctx, gx, gy, b, cw, !banked);
+    rearCar(ctx, gx, gy, b, cw, true); // the same light car on the flat curve and the banked road
     const car = CAR.map(([lx, ly]) => [lx * cw / 100, ly * cw / 100]).map(([lx, ly]) => [gx + lx * Math.cos(b) + ly * Math.sin(b), gy - lx * Math.sin(b) + ly * Math.cos(b)]);
     L.poly(car, 0.6);
     const nx = -Math.sin(b), ny = -Math.cos(b), ox = gx + nx * cw * CG, oy = gy + ny * cw * CG;
@@ -1771,23 +1819,26 @@ SIMS['train'] = (function () {
   sim.update = update; sim.draw = draw; return sim;
 })();
 
-/* =============== 11. Universal gravitation =============== */
+/* =============== 13. Universal gravitation =============== */
 SIMS['gravitation'] = (function () {
   const root = $('#view-gravitation'), st = makeStage($('canvas', root)), O = outs(root), cv = st.canvas;
   const sim = { paused: false, slow: false };
   // three pairs; each slider is [min, max, step, start, factor to SI units]; body sizes in m
+  // s: the short names in the force labels, where F_{A on B} is the force that A exerts on B; say: the same names in words;
+  // ft: the widest the size of the force can be written
   const RHO = 11340, RE = 6.371e6, RM = 1.737e6, ball = m => Math.cbrt(3 * m / (4 * Math.PI * RHO));
   const SC = {
-    lab: { n: ['lead ball', 'lead ball'], m1: [10, 200, 5, 100, 1], m2: [10, 200, 5, 50, 1], r: [0.5, 3, 0.01, 1, 1], R1: ball, R2: ball,
+    lab: { n: ['lead ball', 'lead ball'], s: ['1', '2'], say: ['ball 1', 'ball 2'], ft: '8.88' + NB + '×' + NB + '10⁻¹⁰', m1: [10, 200, 5, 100, 1], m2: [10, 200, 5, 50, 1], r: [0.5, 3, 0.01, 1, 1], R1: ball, R2: ball,
       R1max: ball(200), R2max: ball(200), fu: [1e-6, 'μN'], xu: [1, 'm'], gx: [3, 0.5], yr: 0.5 },
-    you: { n: ['Earth', 'you'], m1: [1, 12, 0.01, 5.97, 1e24], m2: [20, 150, 1, 60, 1], r: [6371, 31855, 1, 6371, 1e3], R1: () => RE, R2: () => 0,
+    you: { n: ['Earth', 'you'], s: ['E', 'you'], say: ['Earth', 'you'], ft: '8888', m1: [1, 12, 0.01, 5.97, 1e24], m2: [20, 150, 1, 60, 1], r: [6371, 31855, 1, 6371, 1e3], R1: () => RE, R2: () => 0,
       R1max: RE, R2max: 0, fu: [1, 'N'], xu: [1e6, '1000 km'], gx: [32, 4], yr: RE },
-    moon: { n: ['Earth', 'Moon'], m1: [1, 12, 0.01, 5.97, 1e24], m2: [1, 20, 0.01, 7.35, 1e22], r: [150000, 800000, 100, 384400, 1e3], R1: () => RE, R2: () => RM,
+    moon: { n: ['Earth', 'Moon'], s: ['E', 'Moon'], say: ['Earth', 'the Moon'], ft: '8.88' + NB + '×' + NB + '10²¹', m1: [1, 12, 0.01, 5.97, 1e24], m2: [1, 20, 0.01, 7.35, 1e22], r: [150000, 800000, 100, 384400, 1e3], R1: () => RE, R2: () => RM,
       R1max: RE, R2max: RM, fu: [1e20, '10^{20} N'], xu: [1e6, '1000 km'], gx: [800, 200], yr: 1.922e8 }
   };
-  const S = { sc: 'lab', m1: 100, m2: 50, r: 1, drag: false };
+  const S = { sc: 'lab', m1: 100, m2: 50, r: 1, drag: false, zf: 1 }; // zf: how much the canvas text is shrunk to fit (1: not at all)
   let geo = null; // where the masses were drawn last, for dragging m₂
   const P = () => SC[S.sc];
+  const on = (q, a, b, gap) => q.s[a] + gap + 'on' + gap + q.s[b]; // subscript of the force that body a exerts on body b (0: m₁, 1: m₂)
   const km = v => Math.round(v).toLocaleString('en-US') + NB + 'km';
   const mNum = (q, v) => q[4] === 1 ? fx(v, 0) : sci(v * q[4], 3);
   const sg = x => sig(x * (1 + 1e-9), 3); // so that halves always round up, as on a calculator
@@ -1798,8 +1849,7 @@ SIMS['gravitation'] = (function () {
     S.sc = k; const q = SC[k];
     rM1.cfg(...q.m1.slice(0, 4)); rM2.cfg(...q.m2.slice(0, 4)); rR.cfg(...q.r.slice(0, 4));
     S.m1 = rM1.get(); S.m2 = rM2.get(); S.r = rR.get();
-    $$('[data-name]', root).forEach(e => { e.textContent = '(' + q.n[e.dataset.name - 1] + ')'; });
-    refresh();
+    names(); refresh();
   });
   function vals() {
     const q = P(), m1 = S.m1 * q.m1[4], m2 = S.m2 * q.m2[4], r = S.r * q.r[4];
@@ -1809,6 +1859,14 @@ SIMS['gravitation'] = (function () {
   const sp = (c, s) => '<span class="' + c + '">' + s + '</span>';
   const M1 = sp('c-m1', '<i>m</i><sub>1</sub>'), M2 = sp('c-m2', '<i>m</i><sub>2</sub>'), RR = sp('c-r', '<i>r</i>'), FF = sp('c-g', '<i>F</i>');
   const A1 = sp('c-m1', '<i>a</i><sub>1</sub>'), A2 = sp('c-m2', '<i>a</i><sub>2</sub>');
+  // the pair's names in the slider labels and in the key, in the same notation as the picture
+  function names() {
+    const q = P();
+    $$('[data-name]', root).forEach(e => { e.textContent = '(' + q.n[e.dataset.name - 1] + ')'; });
+    $$('[data-on]', root).forEach(e => { e.textContent = e.dataset.on === '2' ? on(q, 0, 1, NB) : on(q, 1, 0, NB); });
+    const rd = $('[data-read]', root);
+    if (rd) rd.innerHTML = 'Read <span style="white-space:nowrap">' + sp('c-g', V('F') + '<sub>' + on(q, 0, 1, NB) + '</sub>') + '</span> as “the force of ' + q.say[0] + ' on ' + q.say[1] + '.”';
+  }
   function refresh() {
     const { q, m1, m2, r, F } = vals(), a2 = F / m2, si = q.r[4] !== 1;
     let s = (si ? '<p>' + RR + ' = ' + km(S.r) + ' = ' + sp('c-r', sci(r, 3)) + NB + 'm</p>' : '')
@@ -1819,7 +1877,7 @@ SIMS['gravitation'] = (function () {
       + '<p>' + A2 + ' = ' + FR(FF, M2) + ' = <b>' + U(sg(a2), 'm/s²') + '</b></p>'
       + '<p class="note">Same force on each, so the smaller mass gets the larger acceleration.</p>';
     if (S.sc === 'lab') s += '<p class="note">That force equals the weight of a dust speck of only ' + sig(F / g * 1e6, 2) + ' mg, far too small to feel. Henry Cavendish first measured a force like this in 1798, with lead balls.</p>';
-    else if (S.sc === 'you') s += '<p>' + A2 + ' is <i>g</i> at this distance, so ' + FF + ' = ' + M2 + '<i>g</i> is your weight here.</p><p class="note">Height above the surface: ' + km(S.r - 6371) + '</p>';
+    else if (S.sc === 'you') s += '<p>' + A2 + ' is <i>g</i> at this distance, so ' + sp('c-g', '<i>F</i><sub>' + on(q, 0, 1, NB) + '</sub>') + ' = ' + M2 + '<i>g</i> is your weight here.</p><p class="note">Height above the surface: ' + km(S.r - 6371) + '</p>';
     else {
       const n = +fx(r / RE, 1), v = Math.sqrt(a2 * r);
       s += '<p>The Moon is ' + fx(n, 1) + ' Earth radii away, so Earth’s pull on each kilogram there is ' + FR('1', fx(n, 1) + '²') + ' = ' + FR('1', Math.round(n * n).toLocaleString('en-US')) + ' of its pull at the surface.</p>'
@@ -1838,33 +1896,81 @@ SIMS['gravitation'] = (function () {
   cv.addEventListener('pointermove', e => { const p = st.pos(e); if (S.drag) dragTo(p); else cv.style.cursor = hit(p) ? 'grab' : ''; });
   const end = e => { if (!S.drag) return; S.drag = false; cv.style.cursor = ''; try { cv.releasePointerCapture(e.pointerId); } catch (_) {} };
   cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
-  function draw() {
-    st.fit(); st.clear(); const { ctx, w, h } = st, fs = C.fs, wide = w > h * 1.15, { q, m1, m2, r, F } = vals(), you = S.sc === 'you';
-    const A = wide ? { x: 0, y: 0, w: w * 0.55, h } : { x: 0, y: 0, w, h: h * 0.54 };
-    // scale: the farthest setting fits across, and a planet also fits top to bottom
+  // spots to try for a label on the graph: a grid around its first choice, nearest first
+  const GRID = []; for (let i = -24; i <= 24; i++) for (let j = -16; j <= 16; j++) GRID.push([i, j]);
+  GRID.sort((a, b) => Math.hypot(a[0], a[1]) - Math.hypot(b[0], b[1]));
+  // the ink of a force label as vlab draws it at size px: its width, and how far it reaches above and below its y
+  function vbox(ctx, sub, px) {
+    const m = vlabSize(ctx, 'F', sub, px), ok = v => typeof v === 'number' && isFinite(v);
+    ctx.textBaseline = 'middle';
+    ctx.font = fnt(px * 1.1, 600, true, true); const a = ctx.measureText('F');
+    ctx.font = fnt(px * 0.64, 600); const b = ctx.measureText(sub);
+    const up = Math.max(ok(a.actualBoundingBoxAscent) ? a.actualBoundingBoxAscent : px * 0.45, px * 0.82); // the arrow over the F is the top
+    const dn = Math.max(ok(a.actualBoundingBoxDescent) ? a.actualBoundingBoxDescent : px * 0.4, px * 0.34 + (ok(b.actualBoundingBoxDescent) ? b.actualBoundingBoxDescent : px * 0.36));
+    return { w: m.tot + px * 0.1, up, dn };
+  }
+  // On a canvas too short for the picture and a usable graph (big text on a small screen), everything on it is drawn a
+  // little smaller, never below 80%, rather than overlap. The size settles within a frame or two.
+  function draw() { const fs0 = C.fs; C.fs = fs0 * (S.zf || 1); try { paint(); } finally { C.fs = fs0; } }
+  function paint() {
+    st.fit(); st.clear(); const { ctx, w, h } = st, fs = C.fs, wide = w > h * 1.15, { q, m1, m2, r, F } = vals(), you = S.sc === 'you', moon = S.sc === 'moon';
+    const Aw = wide ? w * 0.55 : w, X0 = 18, X1 = Aw - 14; // the picture's width; where text may start and end
+    // top: the legend, with the size of each force on the same line where this pair's widest value fits
+    const legT = 'gravitational force on each mass', legW = 44 + richW(ctx, legT, 0.8);
+    const one = X0 + legW + fs + richW(ctx, '*F* = ' + q.ft + NB + 'N', 0.9, 700) <= X1, topH = fs * (one ? 2.2 : 3.45);
+    // bottom: the drag hint and the notes, in as few lines as they fit, two to a line. Room is kept for every note this
+    // pair can show, so the picture never moves when one of them appears
+    const hint = 'Drag *m*_{2} to change *r*', nBig = '(Earth and Moon drawn larger than scale)', nCut = '(force arrows shortened to fit)';
+    const item = t => { const sz = t === hint ? 0.74 : 0.72; return { t, sz, w: richW(ctx, t, sz) }; }, fit2 = (a, b) => a.w + fs * 1.5 + b.w <= X1 - X0;
+    const pack = its => its.length === 1 ? [its] : its.length === 2 ? (fit2(its[0], its[1]) ? [its] : [[its[0]], [its[1]]])
+      : fit2(its[0], its[2]) ? [[its[0], its[2]], [its[1]]] : fit2(its[0], its[1]) ? [[its[0], its[1]], [its[2]]] : fit2(its[1], its[2]) ? [[its[0]], [its[1], its[2]]] : its.map(x => [x]);
+    const notes = moon ? [nBig, nCut] : [nCut];
+    let rows = pack([hint, ...notes].map(item)), botH = fs * (1.5 + 1.1 * (rows.length - 1));
+    // scale: the farthest setting fits across, and the bodies fit top to bottom with their tags, the force labels and r
     const pad = fs * 1.1, dot = fs * 0.55, off = you ? dot : 0, rmax = q.r[1] * q.r[4];
-    const min1 = q.R1max >= RE ? fs * 0.8 : 0, min2 = S.sc === 'moon' ? fs * 0.55 : 0;
-    const k = Math.min((A.w - 2 * pad - (you ? 2 * dot : min1 + min2)) / (rmax + q.R1max + q.R2max), Math.max(fs * 1.5, (A.h - fs * 11.5) / 2) / q.R1max);
+    const min1 = q.R1max >= RE ? fs * 0.8 : 0, min2 = moon ? fs * 0.55 : 0;
+    const s1 = on(q, 1, 0, ' '), s2 = on(q, 0, 1, ' '); // the force on m₁ (exerted by m₂), and the force on m₂ (exerted by m₁)
+    const ah = 10.5, gp = fs * 0.2, b1 = vbox(ctx, s1, fs), b2 = vbox(ctx, s2, fs); // ah: half the height of a force arrow, with its border
+    const zone = 9 + ah + gp + Math.max(b1.up + b1.dn, b2.up + b2.dn); // a force label beside its lane, measured from the line of centers
+    const tagH = fs * 2.05, rH = fs * 1.4, fixV = gp + tagH + fs * 0.5 + rH; // a body's two-line tag; the r label under the r arrow
+    const kw = (Aw - 2 * pad - (you ? 2 * dot : min1 + min2)) / (rmax + q.R1max + q.R2max);
+    // Earth with you: its force label goes inside it, above its arrow, at full size or a little smaller. Where Earth is
+    // too small for that (narrow screens), the label sits just above Earth, under Earth's tag, with a short leader
+    const inSz = R => [1, 0.88, 0.77].find(z => { const b = vbox(ctx, s1, fs * z); return Math.hypot((b.w + 8) / 2, 9 + ah + gp + b.up + b.dn + 6) <= R * 1.04 - 5; });
+    const lift = R => you && !inSz(R) ? b1.up + b1.dn + 6 + gp : 0; // the extra room above Earth for that label
+    // height: stacked above the graph, the picture takes what this pair needs, from 54% up to 64% of the canvas, while the
+    // graph keeps a plot at least 4 lines tall. Earth with you aims for a radius of 3.9 lines, enough for its label inside it
+    const R1t = Math.min(RE * kw, fs * 3.9), body = you ? 2.08 * R1t + 2 + lift(R1t) : 2 * Math.max(q.R1max * kw, min1, q.R2max * kw, min2, zone);
+    const cap = Math.max(h * 0.54, Math.min(h * 0.64, h - fs * 11.1));
+    if (!wide && topH + body + fixV + botH + 4 > cap) { rows = pack(notes.map(item)); botH = fs * (1.5 + 1.1 * (rows.length - 1)); } // no room: drop the hint
+    const need = topH + body + fixV + botH + 4;
+    S.zf = wide ? 1 : clamp((S.zf || 1) * cap / need, 0.8, 1);
+    const A = { x: 0, y: 0, w: Aw, h: wide ? h : clamp(need, h * 0.54, cap) };
+    const top = A.y + topH, rowY = i => A.y + A.h - fs * (0.9 + 1.1 * i), bot = A.y + A.h - botH;
+    const Rfit = e => (bot - top - fixV - e - 2) / 2.08; // 2.08: Earth's pale rim makes it 4% larger
+    let k = Math.min(kw, Math.max(fs * 1.5, Rfit(0)) / q.R1max);
+    if (you && !inSz(RE * k)) k = Math.min(kw, Math.max(fs * 1.5, Rfit(lift(0))) / q.R1max); // room for the label above Earth
+    const zIn = you ? inSz(RE * k) : 1, ext = you && !zIn ? lift(0) : 0;
     const R1 = Math.max(q.R1(m1) * k, min1), R2 = you ? dot : Math.max(q.R2(m2) * k, min2);
     const R1m = Math.max(q.R1max * k, min1), R2m = you ? dot : Math.max(q.R2max * k, min2), Rm = Math.max(R1m, R2m);
     const span = R1m + rmax * k + off + R2m, x1 = A.x + (A.w - span) / 2 + R1m, x2 = x1 + r * k + off;
+    // room above and below the line of centers, the same for every setting of the sliders: Earth with you has its own
+    // label inside it, while small bodies have their force labels above and below the lanes
+    const dl = clamp(Math.min(R1, R2) * 0.9, 5, 9);
+    const up = (you ? R1m * 1.04 + 1 + ext : Math.max(Rm, zone)) + gp + tagH, low = you ? R1m * 1.04 + fs * 0.5 : Math.max(Rm, zone) + fs * 0.5;
+    const cy = Math.max(top + up, Math.min(bot - low - rH, (top + up + bot - low - rH) / 2)), yU = cy - dl, yD = cy + dl, yd = cy + low;
+    geo = { x1, x2, k, off, cy, R2 };
     // the force pair: equal lengths, linear in F, in two lanes so the arrows never overlap
     const F0 = GRAV * q.m1[3] * q.m1[4] * q.m2[3] * q.m2[4] / Math.pow(q.r[3] * q.r[4], 2);
-    const Lraw = A.w * 0.11 * F / F0, Lcap = Math.min((x2 - x1) * 0.9, A.w * 0.42), cut = Lraw > Lcap, L = clamp(Lraw, 6, Lcap);
-    const notes = [];
-    if (cut) notes.push('(force arrows shortened to fit)');
-    if (S.sc === 'moon' && R1 > q.R1(m1) * k * 1.2) notes.push('(Earth and Moon drawn larger than scale)');
-    const dl = clamp(Math.min(R1, R2) * 0.9, 5, 9);
-    const top = A.y + fs * 3.3, bot = A.y + A.h - fs * (1.8 + 1.1 * notes.length);
-    const up = Math.max(Rm + fs * 0.75, dl + fs * 2.6) + fs * 1.6, dn = Math.max(Rm + fs, dl + fs * 2.5) + fs * 1.5;
-    const cy = Math.max(top + up, Math.min(bot - dn, (top + up + bot - dn) / 2)), yU = cy - dl, yD = cy + dl;
-    geo = { x1, x2, k, off, cy, R2 };
+    const L0 = you ? Math.min(A.w * 0.11, R1 * 0.7) : A.w * 0.11; // Earth and you: at the start both arrows stay inside Earth
+    const Lraw = L0 * F / F0, Lcap = Math.min((x2 - x1) * 0.9, A.w * 0.42), cut = Lraw > Lcap, L = clamp(Lraw, 6, Lcap);
+    const big = moon && R1 > q.R1(m1) * k * 1.2;
     // distance r, measured between the centers
-    const yd = cy + Math.max(Rm + fs, dl + fs * 2.5), xm = (x1 + x2) / 2;
+    const xm = (x1 + x2) / 2;
     line(ctx, x1, cy, x1, yd + 6, C.faint, 1.5, [4, 4]); line(ctx, x2, cy, x2, yd + 6, C.faint, 1.5, [4, 4]);
     arrow(ctx, xm, yd, x1, yd, C.dv, 2); arrow(ctx, xm, yd, x2, yd, C.dv, 2);
-    const rl = '*r* = ' + (q.r[4] === 1 ? U(fx(S.r, 2), 'm') : km(S.r)), rw = richW(ctx, rl, 0.88, 700) / 2 + 6;
-    rich(ctx, rl, clamp(xm, A.x + rw, A.x + A.w - rw), yd + fs * 0.95, { sz: 0.88, w: 700, c: C.dv, al: 'center', halo: true });
+    const rl = '*r* = ' + (q.r[4] === 1 ? U(fx(S.r, 2), 'm') : km(S.r)), rw = richW(ctx, rl, 0.88, 700), rx = clamp(xm, X0 + rw / 2, X1 - rw / 2), ry = yd + fs * 0.92;
+    rich(ctx, rl, rx, ry, { sz: 0.88, w: 700, c: C.dv, al: 'center', halo: true });
     // the two masses
     if (q.R1max >= RE) { circ(ctx, x1, cy, R1 * 1.04 + 1, { fill: C.accent2 }); circ(ctx, x1, cy, R1, { fill: C.planet }); }
     else circ(ctx, x1, cy, R1, { fill: C.planet, stroke: C.scene, w: 2 });
@@ -1877,51 +1983,135 @@ SIMS['gravitation'] = (function () {
     shape(x1, yU, x1 + L); ctx.stroke(); shape(x2, yD, x2 - L); ctx.stroke();
     shape(x1, yU, x1 + L); ctx.fill(); shape(x2, yD, x2 - L); ctx.fill(); ctx.restore();
     if (cut) for (const [xa, ya] of [[x1 + L * 0.42, yU], [x2 - L * 0.42, yD]]) for (const o of [-3, 3]) line(ctx, xa + o - 3, ya + 7, xa + o + 3, ya - 7, C.scene, 2.5);
-    vlab(ctx, 'F', '2 on 1', x1 + L / 2, yU - fs * 1.1, { c: C.force, al: 'center' });
-    vlab(ctx, 'F', '1 on 2', x2 - L / 2, yD + fs * 1.35, { c: C.force, al: 'center' });
-    ctx.font = fnt(fs * 0.74, 400); const nw1 = ctx.measureText(q.n[0]).width / 2, nw2 = ctx.measureText(q.n[1]).width / 2, sh = Math.max(0, (nw1 + nw2 + fs * 0.6 - (x2 - x1)) / 2);
-    const tag = (x, R, sub, name, col, nx) => {
-      const y = cy - Math.max(R + fs * 0.75, dl + fs * 2.6);
-      rich(ctx, '*m*_{' + sub + '}', x, y, { sz: 1.05, w: 700, c: col, al: 'center', halo: true });
-      txt(ctx, name, nx, y - fs * 1.1, { sz: 0.74, c: C.muted, al: 'center', halo: true });
+    // labels: each takes the nearest free spot, where it covers no other label, arrow, dashed line or body
+    const LB = labeler({ x: A.x + 6, y: top - fs * 0.3, w: A.w - 12, h: bot - top + fs * 0.3 });
+    const disk = (x, y, R, wt) => { const n = 24, Q = []; for (let i = 0; i < n; i++) Q.push([x + (R + 2) * Math.cos(i / n * TAU), y + (R + 2) * Math.sin(i / n * TAU)]); LB.poly(Q, wt); };
+    const rim = (x, y, R) => { const n = 48; for (let i = 0; i < n; i++) { const a = i / n * TAU, b = (i + 1) / n * TAU; LB.line(x + R * Math.cos(a), y + R * Math.sin(a), x + R * Math.cos(b), y + R * Math.sin(b), 8, 3); } };
+    LB.line(x1, yU, x1 + L, yU, ah * 2, 3); LB.line(x2, yD, x2 - L, yD, ah * 2, 3); // the force arrows
+    LB.line(x1, cy + R1, x1, yd + 6, 6, 2); LB.line(x2, cy + R2, x2, yd + 6, 6, 2); // the dashed lines, below the bodies
+    LB.line(Math.min(x1, x2), yd, Math.max(x1, x2), yd, 14, 2); LB.rect(rx - rw / 2 - 3, ry - fs * 0.55, rw + 6, fs * 1.1, 3); // r and its label
+    if (you) rim(x1, cy, R1 * 1.04 + 1); else disk(x1, cy, R1, 3); // a label may sit inside big Earth, but never across its edge
+    disk(x2, cy, R2, 3);
+    // tags: the symbol m₁ or m₂ with the body's name above it; yb is the bottom of the tag
+    ctx.font = fnt(fs * 0.74, 400); const nw = [ctx.measureText(q.n[0]).width, ctx.measureText(q.n[1]).width];
+    const symW = n => richW(ctx, '*m*_{' + n + '}', 1.05, 700);
+    const tag = (x, yb, n, col, nx) => {
+      const sw = symW(n), ww = nw[n - 1];
+      LB.rect(x - sw / 2 - 2, yb - fs * 1.08, sw + 4, fs * 1.08, 3); LB.rect(nx - ww / 2 - 2, yb - tagH, ww + 4, fs * 0.8, 3);
+      rich(ctx, '*m*_{' + n + '}', x, yb - fs * 0.62, { sz: 1.05, w: 700, c: col, al: 'center', halo: true });
+      txt(ctx, q.n[n - 1], nx, yb - fs * 1.67, { sz: 0.74, c: C.muted, al: 'center', halo: true });
     };
-    tag(x1, R1, '1', q.n[0], C.planet, Math.max(x1 - sh, A.x + nw1 + 4)); tag(x2, R2, '2', q.n[1], C.objEdge, x2 + sh);
-    legend(ctx, 18, fs * 1.3, [{ c: C.force, t: 'gravitational force on each mass' }]);
-    rich(ctx, '*F* = ' + U(sg(F), 'N'), 62, fs * 2.55, { sz: 0.9, w: 700, c: C.force, halo: true });
-    const ny = A.y + A.h - fs * 0.9;
-    if (ny - fs * 0.5 > yd + fs * 1.5) rich(ctx, 'Drag *m*_{2} to change *r*', 18, ny, { sz: 0.74, c: C.muted, halo: true });
-    notes.forEach((t, i) => txt(ctx, t, 18, ny - (i + 1) * fs * 1.1, { sz: 0.72, c: C.muted, halo: true }));
+    if (you) tag(x1, cy - R1 * 1.04 - 1 - gp - ext, 1, C.planet, clamp(x1, X0 + nw[0] / 2, X1 - nw[0] / 2));
+    else {
+      // the names move apart when the bodies are close; one held at an edge pushes the other one farther
+      const sh = Math.max(0, (nw[0] / 2 + nw[1] / 2 + fs * 0.6 - (x2 - x1)) / 2);
+      let n1 = x1 - sh, n2 = x2 + sh;
+      if (n1 < X0 + nw[0] / 2) { n2 += X0 + nw[0] / 2 - n1; n1 = X0 + nw[0] / 2; }
+      if (n2 > X1 - nw[1] / 2) { n1 = Math.max(X0 + nw[0] / 2, n1 - (n2 - X1 + nw[1] / 2)); n2 = X1 - nw[1] / 2; }
+      tag(x1, cy - Math.max(R1, zone) - gp, 1, C.planet, n1);
+      tag(x2, cy - Math.max(R2, zone) - gp, 2, C.objEdge, n2);
+    }
+    // a force label beside its arrow (from xa to xb in lane y0) on side s, −1 above or +1 below: spots nearest the middle first
+    const spots = (xa, xb, y0, s, b, lim) => {
+      const lo = Math.min(xa, xb), hi = Math.max(xa, xb), mid = (lo + hi) / 2, reach = (hi - lo) / 2 + b.w / 2 + fs * 3.5, out = [];
+      for (const dy of [0, 0.5, 1, 1.6, 2.3, 3.1]) {
+        const yc = y0 + s * (ah + gp + (b.up + b.dn) / 2 + dy * fs);
+        for (let d = 0; d <= reach; d += fs * 0.25) for (const x of d ? [mid + d, mid - d] : [mid]) if (!lim || Math.abs(x - lim[0]) + b.w / 2 < lim[1]) out.push([x, yc]);
+      }
+      return out.length ? out : [[mid, y0 + s * (ah + gp + (b.up + b.dn) / 2)]];
+    };
+    const force = (sub, xa, xb, y0, s, lim, zs) => {
+      let best = null;
+      for (const z of zs || [1, 0.88, 0.77]) { // smaller type only where no spot is free at full size
+        const b = vbox(ctx, sub, fs * z), t = LB.test(b.w + 4, b.up + b.dn + 2, spots(xa, xb, y0, s, b, lim));
+        if (!best || t.s < best.t.s) best = { b, t, z };
+        if (t.s < 1) break;
+      }
+      const { b, t, z } = best; LB.book(t.c, b.w + 4, b.up + b.dn + 2);
+      vlab(ctx, 'F', sub, t.c[0], t.c[1] + (b.up - b.dn) / 2, { c: C.force, al: 'center', sz: z });
+    };
+    if (you && !zIn) { // Earth too small to hold its label: the label just above Earth, with a leader down to the middle of its arrow
+      const mx = x1 + L / 2, bw = b1.w + 4, bh = b1.up + b1.dn + 2, c = [clamp(mx, X0 + bw / 2, X1 - bw / 2), cy - R1 * 1.04 - 1 - gp - bh / 2 - 2];
+      const ex = clamp(mx, c[0] - bw / 2 + 4, c[0] + bw / 2 - 4), ey = c[1] + bh / 2 + 3; // a small gap below the label
+      line(ctx, ex, ey, mx, yU - 5, C.force, 1.6); LB.line(ex, ey, mx, yU - 5, 5, 2); LB.book(c, bw, bh);
+      vlab(ctx, 'F', s1, c[0], c[1] + (b1.up - b1.dn) / 2, { c: C.force, al: 'center' });
+    } else force(s1, x1, x1 + L, yU, -1, you ? [x1, R1] : null, you ? [zIn] : null); // on m₁; with you, inside Earth next to its arrow
+    if (you) { // your tag: just above you, off Earth and clear of everything else
+      const bw = Math.max(symW(2), nw[1]) + 4, Re = R1 * 1.04 + 4, ts = [];
+      for (const dy of [0, 0.4, 0.8, 1.2, 1.8, 2.6]) for (const dx of [0, 0.3, 0.6, 0.9, 1.2, 1.6, 2, 2.5, 3, 3.6, -0.3, -0.6, -1]) ts.push([x2 + dx * fs, cy - R2 - gp - tagH / 2 - dy * fs]);
+      const offE = c => Math.hypot(clamp(x1, c[0] - bw / 2, c[0] + bw / 2) - x1, clamp(cy, c[1] - tagH / 2, c[1] + tagH / 2) - cy) > Re;
+      let c = null, cs = Infinity;
+      for (const t of ts) { if (!offE(t)) continue; const s = LB.test(bw, tagH, [t]).s; if (s < 1) { c = t; break; } if (s < cs) { cs = s; c = t; } }
+      c = c || ts[0]; tag(c[0], c[1] + tagH / 2, 2, C.objEdge, c[0]);
+    }
+    if (you) disk(x1, cy, R1 * 1.04 + 1, 2); // everything else about you stays off Earth
+    force(s2, x2, x2 - L, yD, 1); // on m₂
+    // top and bottom lines
+    // (on a canvas narrower than a line of words, the words shrink to fit rather than run off the edge)
+    const fT = '*F* = ' + U(sg(F), 'N'), room = X1 - X0 - 44, lsz = Math.min(0.8, 0.8 * room / (legW - 44)), fsz = one ? 0.9 : Math.min(0.9, 0.9 * room / richW(ctx, fT, 0.9, 700));
+    arrow(ctx, X0, fs * 1.3, X0 + 34, fs * 1.3, C.force, 3.5); rich(ctx, legT, X0 + 44, fs * 1.3, { sz: lsz, halo: true });
+    rich(ctx, fT, one ? X0 + legW + fs : X0 + 44, one ? fs * 1.3 : fs * 2.55, { sz: fsz, w: 700, c: C.force, halo: true });
+    rows.forEach((rw, i) => rw.forEach((it, j) => {
+      if ((it.t === nBig && !big) || (it.t === nCut && !cut)) return;
+      rich(ctx, it.t, j ? X1 : X0, rowY(i), { sz: Math.min(it.sz, it.sz * (X1 - X0) / it.w), c: C.muted, halo: true, al: j ? 'right' : 'left' });
+    }));
     // graph of F against r for these two masses
     const B = wide ? { x: w * 0.56, y: fs * 0.8, w: w * 0.43, h: h - fs * 1.6 } : { x: fs * 0.6, y: A.h + fs * 0.1, w: w - fs * 1.2, h: h - A.h - fs * 0.7 };
     box(ctx, B.x, B.y, B.w, B.h, 'Force *F* against distance *r*');
     const PB = { x: B.x + fs * 4.4, y: B.y + fs * 2.9, w: B.w - fs * 5.6, h: B.h - fs * 6.4 };
     const du = q.fu[0], xu = q.xu[0], rmin = q.r[0] * q.r[4], Fat = x => GRAV * m1 * m2 / (x * x);
-    const ymax = niceCeil(Fat(q.yr) / du * 1.05), Y = v => PB.y + PB.h - v / ymax * PB.h;
-    const pts = [{ x: r / xu, y: F / du, c: C.force, r: 8 }];
-    let y2 = null; // the 3r label always sits above the 2r label, so the two never overlap
+    const ymax = niceCeil(Fat(q.yr) / du * 1.05);
+    const pts = [{ x: r / xu, y: F / du, c: C.force, r: 8 }], marks = [];
     for (const [f, lab] of [[0.5, '/{*r*}{2}: 4*F*'], [2, '2*r*: /{*F*}{4}'], [3, '3*r*: /{*F*}{9}']]) {
       const x = r * f; if (x < rmin * 0.999 || x > rmax * 1.001) continue;
-      const xv = x / xu, yv = Fat(x) / du, right = xv > q.gx[0] * 0.8, al = f < 1 ? 'left' : right ? 'right' : 'center';
-      let ya = Y(yv) - (f < 1 ? 22 : 30);
-      if (f === 3 && y2 !== null) ya = Math.min(ya, y2 - fs * 1.75); else if (f === 2) y2 = ya;
-      pts.push({ x: xv, y: yv, c: C.force, r: 6, hollow: true, lab, al, lx: al === 'left' ? 12 : right ? 8 : 0, ly: ya - Y(yv) });
+      pts.push({ x: x / xu, y: Fat(x) / du, c: C.force, r: 6, hollow: true }); marks.push({ x: x / xu, y: Fat(x) / du, lab });
     }
     const pl = plot(ctx, PB, { xmin: 0, xmax: q.gx[0], xstep: niceStep(q.gx[0], clamp(PB.w / (fs * 3.2), 3, 8)), ymin: 0, ymax, ystep: niceStep(ymax, clamp(PB.h / (fs * 1.7), 2, 6)),
       xlab: 'distance *r* (' + q.xu[1] + ')', ylab: '*F* (' + q.fu[1] + ')', xc: C.dv, yc: C.force,
       curves: [{ f: x => x * xu >= rmin * 0.999 ? Fat(x * xu) / du : NaN, c: C.force }], pts });
+    // the labels of the comparison points sit beside the curve, never on it or on each other
+    const GL = labeler({ x: PB.x + 3, y: PB.y + 3, w: PB.w - 6, h: PB.h - 6 });
     if (you) { // the law holds outside Earth; inside, less of Earth's mass pulls you
       const xe = pl.X(RE / xu), xc = (PB.x + xe) / 2;
       ctx.save(); ctx.globalAlpha = 0.6; ctx.fillStyle = C.surface2; ctx.fillRect(PB.x + 1.5, PB.y, xe - PB.x - 1.5, PB.h - 1); ctx.restore();
-      txt(ctx, 'inside', xc, PB.y + PB.h * 0.6, { sz: 0.66, c: C.muted, al: 'center' });
-      txt(ctx, 'Earth', xc, PB.y + PB.h * 0.6 + fs * 0.8, { sz: 0.66, c: C.muted, al: 'center' });
+      // the words only where the band holds them, at a height clear of every point on the graph
+      ctx.font = fnt(fs * 0.66, 400); const iw = Math.max(ctx.measureText('inside').width, ctx.measureText('Earth').width);
+      const clear = iy => pts.every(p => { const px = pl.X(p.x), py = pl.Y(p.y), r = p.r + 4;
+        return px + r < xc - iw / 2 || px - r > xc + iw / 2 || py + r < iy - fs * 0.45 || py - r > iy + fs * 1.25; });
+      const iy = xe - PB.x >= iw + 10 && PB.h >= fs * 2.6 ? [0.6, 0.22, 0.4, 0.8].map(t => PB.y + PB.h * t).find(y => y + fs * 1.25 <= PB.y + PB.h - 2 && clear(y)) : undefined;
+      if (iy !== undefined) {
+        txt(ctx, 'inside', xc, iy, { sz: 0.66, c: C.muted, al: 'center' });
+        txt(ctx, 'Earth', xc, iy + fs * 0.8, { sz: 0.66, c: C.muted, al: 'center' });
+      }
+      GL.rect(PB.x, PB.y, xe - PB.x, PB.h, 3);
       circ(ctx, pl.X(r / xu), pl.Y(F / du), 8, { fill: C.force, stroke: C.surface, w: 2 });
     }
+    let pp = null;
+    for (let i = 0; i <= 120; i++) {
+      const xv = q.gx[0] * i / 120; if (xv * xu < rmin * 0.999) { pp = null; continue; }
+      const p = [pl.X(xv), Math.max(pl.Y(Fat(xv * xu) / du), PB.y - fs * 3)];
+      if (pp) GL.line(pp[0], pp[1], p[0], p[1], 7, 3); pp = p;
+    }
+    for (const p of pts) { const px = pl.X(p.x), py = pl.Y(p.y); GL.rect(px - p.r - 2, py - p.r - 2, 2 * p.r + 4, 2 * p.r + 4, 3); }
+    for (const m of marks) {
+      const px = pl.X(m.x), py = pl.Y(m.y); if (py < PB.y - 6 || py > PB.y + PB.h + 6) continue;
+      // first choice: up and to the right of the point, outside the bend of the curve; then the nearest free spot
+      let best = null;
+      for (const z of [0.78, 0.68, 0.6]) { // smaller type only where no spot is free at full size
+        const tw = richW(ctx, m.lab, z, 700) + 4, th = fs * z * 1.92, x0 = px + 10 + tw / 2, y0 = py - 10 - th / 2, st = fs * 0.3;
+        const t = GL.test(tw, th, GRID.map(([i, j]) => [x0 + i * st, y0 + j * st]));
+        if (!best || t.s < best.t.s) best = { t, z, tw, th };
+        if (t.s < 1) break;
+      }
+      const c = GL.book(best.t.c, best.tw, best.th);
+      rich(ctx, m.lab, c[0], c[1], { sz: best.z, c: C.force, halo: true, al: 'center', w: 700 });
+    }
   }
-  refresh();
+  names(); refresh();
   sim.draw = draw; return sim;
 })();
 
-/* =============== 12. Circular orbits =============== */
+/* =============== 14. Circular orbits =============== */
 SIMS['orbits'] = (function () {
   const root = $('#view-orbits'), st = makeStage($('canvas', root)), O = outs(root);
   const sim = { paused: false, slow: false };
@@ -2000,7 +2190,7 @@ SIMS['orbits'] = (function () {
   fire(); refresh();
   sim.update = update; sim.draw = draw; return sim;
 })();
-/* =============== 8. Car: is there an outward force? =============== */
+/* =============== 10. Turning car: is there an outward force? =============== */
 SIMS['turning-car'] = (function () {
   const root = $('#view-turning-car'), st = makeStage($('canvas', root)), O = outs(root);
   const sim = { paused: false, slow: false };
@@ -2086,7 +2276,281 @@ SIMS['turning-car'] = (function () {
   sim.update = update; sim.draw = draw; return sim;
 })();
 
-/* =============== 13. Kepler’s laws =============== */
+/* =============== 11. Coriolis force: a ball thrown across a rotating platform =============== */
+SIMS['coriolis'] = (function () {
+  const root = $('#view-coriolis'), st = makeStage($('canvas', root)), O = outs(root);
+  const sim = { paused: false, slow: false };
+  // distances from the center (m): R to you and your friend (the ball crosses 2R), RPE where you stand, RP the platform's edge, RG the grass's edge
+  const R = 4, RPE = 4.3, RP = 4.6, RG = 6, PRE = 1, HOLD = 2.2;
+  const BUSH = [[14, 0.36], [50, 0.27], [86, 0.33], [126, 0.25], [161, 0.38], [204, 0.29], [238, 0.34], [279, 0.25], [313, 0.37], [345, 0.28]]; // shrubs: angle (°), radius (m)
+  const S = { dir: -1, w: 0.5, v: 5, m: 0.15, cf: false, t: -PRE }; // dir −1: clockwise seen from above; t: time since the throw (s)
+  const restart = () => { S.t = -PRE; };
+  seg(root, 'dir', v => { S.dir = v === 'ccw' ? 1 : -1; restart(); refresh(); });
+  range(root, 'w', v => U(fx(v, 2), 'rad/s'), v => { S.w = v; restart(); refresh(); });
+  range(root, 'v', v => U(fx(v, 1), 'm/s'), v => { S.v = v; restart(); refresh(); });
+  range(root, 'm', v => U(fx(v, 2), 'kg'), v => { S.m = v; refresh(); });
+  act(root, 'throw', restart);
+  const bC = act(root, 'cf', () => { S.cf = !S.cf; bC.setAttribute('aria-pressed', String(S.cf)); refresh(); });
+  const tF = () => 2 * R / S.v;
+  const rot = (x, y, a) => [x * Math.cos(a) - y * Math.sin(a), x * Math.sin(a) + y * Math.cos(a)];
+  // The ball t seconds after the throw. From above it crosses straight through the center at speed v.
+  // On the platform: turn the picture back by the platform's angle, and take away the platform's own motion (v′ = v − ω × r).
+  function ball(t, onP) {
+    const wz = S.dir * S.w, Y = -R + S.v * t;
+    if (!onP) return { x: 0, y: Y, vx: 0, vy: S.v };
+    const a = -wz * t, p = rot(0, Y, a), q = rot(wz * Y, S.v, a);
+    return { x: p[0], y: p[1], vx: q[0], vy: q[1] };
+  }
+  function refresh() {
+    const T = tF(), turn = S.w * T;
+    let s = '<p>Time to cross: <i>t</i><sub>f</sub> = ' + FR('2<i>R</i>', '<i>v</i>') + ' = <b>' + U(fx(T, 2), 's') + '</b> <span class="note">(<i>R</i> = 4.0 m)</span></p>';
+    if (S.w < 1e-6) s += '<p class="big">No rotation: no fictitious force, and the ball goes straight in both views.</p>';
+    else {
+      s += '<p>Meanwhile the platform turns <i>ωt</i><sub>f</sub> = <b>' + fx(turn / DEG, 0) + '°</b> and carries your friend <b>' + U(fx(R * turn, 1), 'm') + '</b> along the edge.</p>'
+        + '<p>Seen on the platform, the ball curves to the <b>' + (S.dir < 0 ? 'left' : 'right') + '</b> of its path and misses your friend by <b>' + U(fx(2 * R * Math.sin(turn / 2), 1), 'm') + '</b>.</p>'
+        + '<p class="big"><i>F</i><sub>Coriolis</sub> = 2<i>mωv</i> = ' + U(sig(2 * S.m * S.w * S.v, 3), 'N') + '</p>'
+        + '<p class="note">as the ball crosses the center, where its speed on the platform is <i>v</i></p>';
+      if (S.cf) { const pct = Math.round(100 * S.w * R / (2 * Math.hypot(S.v, S.w * R)));
+        s += '<p>Centrifugal force <i>mω</i>²<i>r</i>, straight out from the center: <b>' + U(sig(S.m * S.w * S.w * R, 2), 'N') + '</b> at the edge and zero at the center.'
+          + (pct < 50 ? ' Even at the edge it is only about ' + pct + '% of the Coriolis force, so its arrow is short.' : '') + '</p>'; }
+      s += '<p class="note">Fictitious forces are proportional to <i>m</i>, so every ball follows the same path.</p>';
+    }
+    O.read.innerHTML = s;
+  }
+  function update(dt) { S.t += dt; if (S.t > tF() + HOLD) restart(); }
+  function person(ctx, x, y, face, s, col, al) { // seen from above: shoulders across, head in front; face: the screen angle it looks along
+    ctx.save(); ctx.globalAlpha = al; ctx.translate(x, y); ctx.rotate(face); ctx.fillStyle = col;
+    ctx.beginPath(); ctx.ellipse(-s * 0.12, 0, s * 0.38, s * 0.74, 0, 0, TAU); ctx.fill();
+    ctx.beginPath(); ctx.arc(s * 0.24, 0, s * 0.38, 0, TAU); ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = C.scene; ctx.stroke();
+    ctx.restore();
+  }
+  function arcArrow(ctx, cx, cy, r, a0, a1, col) { // along a circle from angle a0 to a1 (counterclockwise positive, y up)
+    const P = a => [cx + r * Math.cos(a), cy - r * Math.sin(a)], n = 24;
+    ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath();
+    for (let i = 0; i <= n - 4; i++) { const p = P(a0 + (a1 - a0) * i / n); if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }
+    ctx.stroke(); ctx.restore();
+    const p = P(a0 + (a1 - a0) * (n - 6) / n), q = P(a1); arrow(ctx, p[0], p[1], q[0], q[1], col, 3);
+  }
+  function view(ctx, V, onP, wide) {
+    const fs = C.fs, T = tF(), tt = clamp(S.t, -PRE, T), wz = S.dir * S.w, phi = wz * tt; // phi: how far the platform has turned, seen from above
+    const top = V.y + fs * 2.2, hh = V.h - fs * 2.8, Rg = Math.max(fs * 3, Math.min(V.w * 0.4, hh * 0.48)), k = Rg / RG;
+    const cx = V.x + V.w * (wide ? 0.5 : 0.55), cy = top + hh / 2, P = (x, y) => [cx + x * k, cy - y * k];
+    const pa = onP ? 0 : phi, ga = onP ? -phi : 0, flying = S.t >= 0 && S.t < T, done = S.t >= T, turning = S.w > 1e-6;
+    const L = labeler({ x: V.x + 4, y: V.y + 4, w: V.w - 8, h: V.h - 8 });
+    const put = (s, sz, col, spots, wt) => { const tw = richW(ctx, s, sz, wt) + 4, th = fs * sz * 1.3, c = L.pick(tw, th, spots(tw, th)); rich(ctx, s, c[0], c[1], { sz, c: col, al: 'center', halo: true, w: wt }); };
+    const near = (x, y, ux, uy, d) => (tw, th) => [[x + ux * (d + tw / 2 * Math.abs(ux)), y + uy * (d + th / 2 * Math.abs(uy))], ...L.ring(x, y, tw, th, [d, d + fs, d + fs * 2, d + fs * 3.2])];
+    // the words are drawn last, but their places are booked first
+    const title = onP ? 'On the platform (rotating frame)' : 'From above (inertial frame)';
+    const say = !turning ? (onP ? 'no rotation, so no fictitious force' : 'the platform is not turning')
+      : S.t < 0 ? 'about to throw…' : flying ? (onP ? 'the ball veers to the ' + (S.dir < 0 ? 'left' : 'right') : 'no horizontal force: a straight line')
+      : onP ? '*t* = *t*_{f}: the ball misses your friend' : '*t* = *t*_{f}: your friend is no longer there';
+    const sayC = turning && flying && onP ? C.dv : C.muted, sayW = sayC === C.dv ? 700 : 400;
+    ctx.font = fnt(fs * 0.9, 700); L.rect(V.x + 14, V.y + fs * 0.5, ctx.measureText(title).width + 8, fs * 1.4);
+    L.rect(V.x + 14, V.y + fs * 1.85, richW(ctx, say, 0.75, sayW) + 8, fs);
+    const items = [{ c: C.vel, t: 'velocity' }, { c: C.dv, t: 'fictitious force' }], ly = V.y + V.h - fs * (items.length * 1.3 - 0.3);
+    if (onP) L.rect(V.x + 14, ly - fs * 0.7, 52 + Math.max(...items.map(q => richW(ctx, q.t, 0.8))), fs * 1.3 * items.length);
+    const ovEl = root.querySelector('.overlay'); // the Slow motion / Pause buttons, where they really are
+    if (ovEl) { const q = ovEl.getBoundingClientRect(), cr = st.canvas.getBoundingClientRect(); L.rect(q.left - cr.left - 4, q.top - cr.top - 4, q.width + 8, q.height + 8); }
+    // the ground and its shrubs: fixed seen from above, but seen from the platform they turn the other way
+    circ(ctx, cx, cy, RG * k, { fill: C.ground });
+    ctx.save(); ctx.globalAlpha = 0.5;
+    BUSH.forEach(([d, s], i) => { const a = d * DEG + ga, rr = 5.3 + (i % 2 ? 0.16 : -0.16); circ(ctx, cx + rr * k * Math.cos(a), cy - rr * k * Math.sin(a), s * k, { fill: C.grav }); });
+    ctx.restore();
+    // the platform and its spokes
+    circ(ctx, cx, cy, RP * k, { fill: C.surface, stroke: C.track, w: 3 });
+    for (let j = 0; j < 8; j++) { const a = pa + (j + 0.5) * Math.PI / 4, c = Math.cos(a), s = Math.sin(a); line(ctx, cx + 0.55 * k * c, cy - 0.55 * k * s, cx + (RP - 0.06) * k * c, cy - (RP - 0.06) * k * s, C.track, 1.5); }
+    circ(ctx, cx, cy, 0.55 * k, { fill: C.track });
+    // which way it turns: the platform seen from above, the ground seen from the platform
+    let arcAt = 0;
+    if (turning) {
+      const sg = onP ? -S.dir : S.dir, ra = (RG + 0.45) * k;
+      arcArrow(ctx, cx, cy, ra, Math.PI - sg * 0.42, Math.PI + sg * 0.42, C.muted);
+      for (let i = 0; i < 6; i++) { const u0 = Math.PI - 0.42 + 0.14 * i, u1 = u0 + 0.14; L.line(cx + ra * Math.cos(u0), cy - ra * Math.sin(u0), cx + ra * Math.cos(u1), cy - ra * Math.sin(u1), 10, 0.3); }
+      arcAt = ra;
+    }
+    // seen from above: where you both stood when the ball was thrown
+    const sP = Math.max(7, 0.56 * k), who = [[-Math.PI / 2, C.planet, 'you'], [Math.PI / 2, C.ink, 'friend']];
+    if (!onP && S.t >= 0) for (const [a, col] of who) { const [x, y] = P(RPE * Math.cos(a), RPE * Math.sin(a)); person(ctx, x, y, Math.atan2(cy - y, cx - x), sP, col, 0.3); L.rect(x - sP, y - sP, sP * 2, sP * 2, 2); }
+    // the ball's path so far
+    if (S.t >= 0) {
+      const n = Math.max(2, Math.ceil(48 * tt / T)), pts = [];
+      for (let i = 0; i <= n; i++) { const q = ball(tt * i / n, onP); pts.push(P(q.x, q.y)); }
+      ctx.save(); ctx.strokeStyle = C.obj; ctx.lineWidth = 3; ctx.setLineDash([7, 5]); ctx.beginPath(); pts.forEach((p, i) => { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }); ctx.stroke(); ctx.restore();
+      for (let i = 0; i < n; i += 4) { const j = Math.min(n, i + 4); L.line(pts[i][0], pts[i][1], pts[j][0], pts[j][1], 6, 1); }
+    }
+    // you and your friend now
+    const ppl = who.map(([a, col, name]) => { const [x, y] = P(RPE * Math.cos(a + pa), RPE * Math.sin(a + pa)); person(ctx, x, y, Math.atan2(cy - y, cx - x), sP, col, 1); L.rect(x - sP, y - sP, sP * 2, sP * 2, 3); return { x, y, col, name }; });
+    // the ball, its velocity and, on the platform, the fictitious forces on it (arrows to fixed scales: px per m/s, and px per m/s² of force per kilogram)
+    const b = S.t < 0 ? { x: R * Math.cos(pa - Math.PI / 2), y: R * Math.sin(pa - Math.PI / 2) } : ball(tt, onP);
+    const [bx, by] = P(b.x, b.y), br = Math.max(4.5, 0.2 * k), kv = 0.39 * k, kA = 0.39 * k, Lmax = 0.8 * RP * k;
+    let vl = null; const fl = [];
+    if (flying) {
+      const sp = Math.hypot(b.vx, b.vy) || 1, ux = b.vx / sp, uy = -b.vy / sp, Lv = sp * kv;
+      arrow(ctx, bx, by, bx + ux * Lv, by + uy * Lv, C.vel, 4); L.arrow(bx, by, bx + ux * Lv, by + uy * Lv, 4); vl = { ux, uy, Lv };
+      if (onP && turning) {
+        const ax = 2 * wz * b.vy, ay = -2 * wz * b.vx, am = Math.hypot(ax, ay) || 1, La = Math.min(am * kA, Lmax), ex = bx + ax / am * La, ey = by - ay / am * La; // Coriolis per kg: 2ω × v′, at right angles to v′
+        arrow(ctx, bx, by, ex, ey, C.dv, 4, [7, 5]); L.arrow(bx, by, ex, ey, 4); fl.push(['Coriolis force', ex, ey, ax / am, -ay / am]);
+        const r = Math.hypot(b.x, b.y);
+        if (S.cf && r > 0.08) { const Lc = Math.min(S.w * S.w * r * kA, Lmax), qx = bx + b.x / r * Lc, qy = by - b.y / r * Lc; arrow(ctx, bx, by, qx, qy, C.dv, 3.5, [5, 4]); L.arrow(bx, by, qx, qy, 3.5); if (Lc > fs * 0.8) fl.push(['centrifugal', qx, qy, b.x / r, -b.y / r]); }
+      }
+    }
+    circ(ctx, bx, by, br, { fill: C.obj, stroke: C.objEdge, w: 2 }); L.rect(bx - br, by - br, br * 2, br * 2, 3);
+    // labels, each in the first clear spot near what it labels
+    for (const q of ppl) { const d = Math.hypot(q.x - cx, q.y - cy) || 1; put(q.name, 0.78, q.col, near(q.x, q.y, (q.x - cx) / d, (q.y - cy) / d, sP + fs * 0.35), 700); }
+    if (!onP && S.t >= 0 && Math.abs(phi) * RPE * k > sP * 2.6) for (const [a] of who) { const [x, y] = P(RPE * Math.cos(a), RPE * Math.sin(a)), d = Math.hypot(x - cx, y - cy) || 1; put('*t* = 0', 0.7, C.muted, near(x, y, (x - cx) / d, (y - cy) / d, sP + fs * 0.3), 400); }
+    if (done) { const d = Math.hypot(bx - cx, by - cy) || 1; put('ball at *t* = *t*_{f}', 0.7, C.objEdge, near(bx, by, (bx - cx) / d, (by - cy) / d, br + fs * 0.4), 700); }
+    if (vl) {
+      const sym = onP ? 'v′' : 'v', ws = vlabSize(ctx, sym, '', fs).tot + 4, hs = fs * 1.5, mx = bx + vl.ux * vl.Lv * 0.7, my = by + vl.uy * vl.Lv * 0.7, nx = -vl.uy, ny = vl.ux, dd = fs * 1.05;
+      const c = L.pick(ws, hs, [[mx + nx * dd, my + ny * dd], [mx - nx * dd, my - ny * dd], [bx + vl.ux * (vl.Lv + fs), by + vl.uy * (vl.Lv + fs)], ...L.ring(mx, my, ws, hs, [fs * 1.2, fs * 2.2, fs * 3.2])]);
+      vlab(ctx, sym, '', c[0], c[1] + fs * 0.15, { c: C.vel, al: 'center' });
+    }
+    for (const [s, x, y, ux, uy] of fl) put(s, 0.72, C.dv, near(x, y, ux, uy, fs * 0.35), 700);
+    if (arcAt) put(onP ? 'ground seems to turn' : 'platform turns', 0.7, C.muted, (tw, th) => [[cx - arcAt - fs * 0.5 - tw / 2, cy], [cx - arcAt * 0.91, cy + arcAt * 0.41 + fs * 0.85], [cx - arcAt * 0.91, cy - arcAt * 0.41 - fs * 0.85], ...L.ring(cx - arcAt, cy, tw, th, [fs, fs * 2])], 400);
+    txt(ctx, title, V.x + 18, V.y + fs * 1.2, { sz: 0.9, w: 700, halo: true });
+    rich(ctx, say, V.x + 18, V.y + fs * 2.35, { sz: 0.75, c: sayC, halo: true, w: sayW });
+    if (onP) legend(ctx, V.x + 18, ly, items);
+  }
+  function draw() {
+    st.fit(); st.clear(); const { ctx, w, h } = st, wide = w > h * 1.15;
+    view(ctx, wide ? { x: 0, y: 0, w: w / 2, h } : { x: 0, y: 0, w, h: h / 2 }, false, wide);
+    if (wide) line(ctx, w / 2, 0, w / 2, h, C.line, 2); else line(ctx, 0, h / 2, w, h / 2, C.line, 2);
+    view(ctx, wide ? { x: w / 2, y: 0, w: w / 2, h } : { x: 0, y: h / 2, w, h: h / 2 }, true, wide);
+  }
+  refresh();
+  sim.update = update; sim.draw = draw; return sim;
+})();
+
+/* =============== 12. Fictitious forces in linear motion: a ball hanging in a truck =============== */
+SIMS['hanging-ball'] = (function () {
+  const root = $('#view-hanging-ball'), st = makeStage($('canvas', root)), O = outs(root);
+  const sim = { paused: false, slow: false };
+  // the truck (m): cargo box length and height, floor height, gap to the cab, cab length and height, wheel radius
+  const LB = 4.3, HB = 2.3, FH = 0.8, GAP = 0.12, LC = 1.75, HC = 2.05, WR = 0.46, LT = LB + GAP + LC;
+  // the ball (m): string length, ball radius, the hook's distance from the back of the box. The clip: the truck's speed when it starts (m/s),
+  // where the back of the truck starts (m from the left edge), and a short pause once it has left the picture (s)
+  const LS = 1.25, RB = 0.2, PIV = 0.64 * LB, V0 = 1.5, X0 = 1.8, POST = 0.5;
+  const S = { a: 4, m: 0.2, obs: 'ground', t: 0 };
+  let trip = 12; // how far the truck drives before the clip starts over, set from the width of the picture
+  seg(root, 'obs', v => { S.obs = v; refresh(); });
+  range(root, 'a', v => U(fx(v, 1), 'm/s²'), v => { S.a = v; S.t = 0; refresh(); });
+  range(root, 'm', v => U(fx(v, 2), 'kg'), v => { S.m = v; refresh(); });
+  act(root, 'replay', () => { S.t = 0; });
+  const dist = t => V0 * t + 0.5 * S.a * t * t;
+  const tEnd = () => S.a > 1e-6 ? (Math.sqrt(V0 * V0 + 2 * S.a * trip) - V0) / S.a : trip / V0;
+  function update(dt) { S.t += dt; if (S.t > tEnd() + POST) S.t = 0; }
+  function refresh() {
+    const th = Math.atan(S.a / g), ma = S.m * S.a, T = S.m * Math.hypot(g, S.a), ground = S.obs === 'ground';
+    let s = '<p>tan <i>θ</i> = ' + FR('<i>a</i>', '<i>g</i>') + '  →  <i>θ</i> = <b>' + fx(th / DEG, 1) + '°</b></p>';
+    if (S.a < 1e-6) s += '<p class="big">Constant velocity: the string hangs straight down.</p><p>The truck is not accelerating, so both observers are in inertial frames and neither needs a fictitious force.</p>';
+    else if (ground) s += '<p><b>Inertial observer:</b> the ball speeds up along with the truck, so the forces on it do not balance.</p>'
+      + '<p><span class="sum">Σ</span><i>F</i><sub>x</sub> = <i>T</i> sin <i>θ</i> = <i>m a</i></p>'
+      + '<p><span class="sum">Σ</span><i>F</i><sub>y</sub> = <i>T</i> cos <i>θ</i> − <i>mg</i> = 0</p>'
+      + '<p class="big"><i>T</i> sin <i>θ</i> = <i>m a</i> = ' + U(sig(ma, 3), 'N') + '</p>';
+    else s += '<p><b>Non-inertial observer:</b> the ball is at rest in the truck, so the forces on it must add to zero.</p>'
+      + '<p><span class="sum">Σ</span><i>F</i>′<sub>x</sub> = <i>T</i> sin <i>θ</i> − <i>F</i><sub>fictitious</sub> = 0</p>'
+      + '<p><span class="sum">Σ</span><i>F</i>′<sub>y</sub> = <i>T</i> cos <i>θ</i> − <i>mg</i> = 0</p>'
+      + '<p class="big"><i>F</i><sub>fictitious</sub> = <i>T</i> sin <i>θ</i> = ' + U(sig(ma, 3), 'N') + '</p>';
+    s += '<p>Tension: <i>T</i> = <i>m</i>' + RT('<i>g</i>² + <i>a</i>²') + ' = <b>' + U(sig(T, 3), 'N') + '</b></p>';
+    O.read.innerHTML = s;
+  }
+  function truck(ctx, xr, yr, k) { // side view, facing right; xr: screen x of the back, yr: screen y of the road
+    const X = u => xr + u * k, Y = v => yr - v * k, c0 = LB + GAP, c1 = LT;
+    ctx.fillStyle = C.ink; ctx.fillRect(X(0.25), Y(FH), (LT - 0.45) * k, 0.2 * k); // frame under the box and cab
+    ctx.save(); ctx.lineJoin = 'round';
+    rrect(ctx, X(0), Y(FH + HB), LB * k, HB * k, 0.12 * k); ctx.globalAlpha = 0.55; ctx.fillStyle = C.surface; ctx.fill(); ctx.globalAlpha = 1; ctx.strokeStyle = C.ink; ctx.lineWidth = 2.5; ctx.stroke(); // see-through cargo box
+    ctx.beginPath(); ctx.moveTo(X(c0), Y(FH)); ctx.lineTo(X(c0), Y(FH + HC)); ctx.lineTo(X(c0 + LC * 0.52), Y(FH + HC)); ctx.lineTo(X(c1 - 0.04), Y(FH + HC * 0.5)); ctx.lineTo(X(c1), Y(FH + 0.12)); ctx.lineTo(X(c1), Y(FH)); ctx.closePath();
+    ctx.fillStyle = C.surface; ctx.fill(); ctx.stroke(); // cab
+    ctx.beginPath(); ctx.moveTo(X(c0 + 0.22), Y(FH + HC - 0.2)); ctx.lineTo(X(c0 + LC * 0.5), Y(FH + HC - 0.2)); ctx.lineTo(X(c1 - 0.25), Y(FH + HC * 0.56)); ctx.lineTo(X(c0 + 0.22), Y(FH + HC * 0.56)); ctx.closePath();
+    ctx.fillStyle = C.sky; ctx.fill(); ctx.lineWidth = 1.5; ctx.stroke(); // window
+    ctx.restore();
+    for (const u of [1.0, c0 + LC * 0.55]) { circ(ctx, X(u), Y(WR), WR * k, { fill: C.ink }); circ(ctx, X(u), Y(WR), WR * k * 0.42, { fill: C.faint }); }
+  }
+  function scene(ctx, A, ground, wide) {
+    const fs = C.fs, k = Math.max(8, Math.min((A.w - fs) / (LT + X0 + 4.5), (A.h - fs * 3.8) / (FH + HB + 1.2)));
+    const yr = A.y + (wide ? Math.min(A.h - fs * 1.8, A.h * 0.5 + (FH + HB) * k * 0.6) : A.h - fs * 1.8), d = dist(S.t), th = Math.atan(S.a / g);
+    trip = A.w / k + 0.3 - X0;
+    const xr = ground ? A.x + (X0 + d) * k : A.x + (A.w - LT * k) / 2, G = u => ground ? A.x + u * k : xr + (u - X0 - d) * k; // G: screen x of a point on the ground
+    const X = u => xr + u * k, Y = v => yr - v * k;
+    // posts along the road, the road, and your friend standing beside it
+    const u0 = (A.x - G(0)) / k - 3, u1 = (A.x + A.w - G(0)) / k + 3;
+    for (let p = Math.ceil(u0 / 3) * 3; p <= u1; p += 3) { const x = G(p); line(ctx, x, yr, x, Y(2.7), C.faint, 3); circ(ctx, x, Y(2.75), 4.5, { fill: C.faint }); }
+    line(ctx, A.x, yr, A.x + A.w, yr, C.road, 4);
+    const fx0 = G(0.8);
+    ctx.save(); ctx.globalAlpha = ground ? 1 : 0.35; stick(ctx, fx0, yr, 0, 1.75 * k, C.ink); ctx.restore();
+    truck(ctx, xr, yr, k);
+    ctx.save(); ctx.globalAlpha = ground ? 0.35 : 1; stick(ctx, X(0.6), Y(FH), 0, 1.7 * k, C.ink); ctx.restore(); // you, riding in the back
+    // the ball on its string, the vertical, and the angle between them
+    const px = X(PIV), py = Y(FH + HB) + 2, bx = px - LS * k * Math.sin(th), by = py + LS * k * Math.cos(th);
+    ctx.fillStyle = C.ink; ctx.fillRect(px - 0.13 * k, py - 2, 0.26 * k, 4);
+    line(ctx, px, py, px, py + LS * k * 1.15, C.muted, 1.5, [4, 4]);
+    line(ctx, px, py, bx, by, C.ink, 2);
+    circ(ctx, bx, by, Math.max(5, RB * k), { fill: C.obj, stroke: C.objEdge, w: 2 });
+    if (th > 2.5 * DEG) {
+      const ar = Math.min(LS * k * 0.5, fs * 2.4), big = th > 16 * DEG; angArc(ctx, px, py, ar, Math.PI / 2, Math.PI / 2 + th, C.ink);
+      rich(ctx, '*θ*', big ? px + (ar + fs * 0.55) * Math.cos(Math.PI / 2 + th / 2) : px + fs * 0.7, big ? py + (ar + fs * 0.55) * Math.sin(Math.PI / 2 + th / 2) : py + ar, { sz: 0.85, al: 'center', halo: true });
+    }
+    // the truck's acceleration, which both observers agree on, and who is watching
+    if (S.a > 1e-6) { const ax = X(LB * 0.28), ay = Y(FH + HB + 0.6), La = S.a * 0.17 * k; arrow(ctx, ax, ay, ax + La, ay, C.acc, 5); vlab(ctx, 'a', '', ax + La / 2, ay - fs * 0.95, { c: C.acc, al: 'center' }); }
+    else txt(ctx, 'constant velocity', X(0), Y(FH + HB + 0.6), { sz: 0.75, c: C.muted, halo: true });
+    if (ground) { ctx.font = fnt(fs * 0.7, 400); const tw = ctx.measureText('inertial observer').width; txt(ctx, 'inertial observer', Math.max(A.x + 8, fx0 - tw / 2), yr + fs * 0.95, { sz: 0.7, c: C.muted, halo: true }); }
+    else { ctx.font = fnt(fs * 0.68, 400); const inside = X(0.12) + ctx.measureText('non-inertial observer').width < px - fs * 0.6;
+      txt(ctx, 'non-inertial observer', X(inside ? 0.12 : 0.05), Y(FH + HB) + (inside ? fs * 0.75 : -fs * 0.65), { sz: 0.68, c: C.muted, halo: true }); }
+    txt(ctx, ground ? 'From the ground (inertial frame)' : 'From inside the truck (accelerating frame)', A.x + 18, A.y + fs * 1.2, { sz: 0.9, w: 700, halo: true });
+  }
+  function fbd(ctx, B, ground) { // the free-body diagram, to a fixed scale: m g is always drawn the same length
+    const fs = C.fs, th = Math.atan(S.a / g), tn = S.a / g, flat = B.w > B.h * 1.25, pad = fs * 0.9, mg = S.m * g, T = S.m * Math.hypot(g, S.a), ma = S.m * S.a;
+    const who = ground ? 'inertial' : 'non-inertial', t1 = 'Forces on the ball, as the ' + who + ' observer sees them', t2 = 'Forces on the ball (' + who + ' observer)';
+    ctx.font = fnt(fs * 0.82, 700); const room = B.w - fs * 1.6;
+    box(ctx, B.x, B.y, B.w, B.h, ctx.measureText(t1).width < room ? t1 : ctx.measureText(t2).width < room ? t2 : 'Forces on the ball');
+    const top = B.y + fs * 2.3, bot = B.y + B.h - fs * 0.8, comp = th > 2.5 * DEG;
+    const Lg = clamp(Math.min((bot - top - fs * 3.6) / 2, B.w * (flat ? 0.17 : 0.21)), fs * 2, fs * 7.5), Lh = Lg * tn;
+    const wL = Math.max(vlabSize(ctx, 'F', 'fictitious', fs * 0.95).tot, richW(ctx, '= *m a* = 10.0 N', 0.75, 600)); // room for the fictitious force's label, so the diagram never moves
+    const f0x = Math.max(B.x + B.w * (flat ? 0.33 : 0.5), B.x + pad + Lg * 1.03 + wL + fs * 0.5), f0y = top + fs * 1.7 + Lg;
+    const vecText = (sym, sub, val, x, y, col) => { const ws = vlabSize(ctx, sym, sub, fs * 0.95).tot; vlab(ctx, sym, sub, x, y, { c: col, sz: 0.95 }); txt(ctx, ' = ' + val, x + ws, y, { sz: 0.8, c: col, w: 600, halo: true }); };
+    // the arrows first, so that no arrow is drawn over a label
+    circ(ctx, f0x, f0y, fs * 0.62, { fill: C.obj, stroke: C.objEdge, w: 2 });
+    if (comp) { arrow(ctx, f0x, f0y, f0x + Lh, f0y, C.force, 3, [6, 5]); arrow(ctx, f0x, f0y, f0x, f0y - Lg, C.force, 3, [6, 5]); }
+    arrow(ctx, f0x, f0y, f0x, f0y + Lg, C.force, 6);
+    arrow(ctx, f0x, f0y, f0x + Lh, f0y - Lg, C.force, 6);
+    if (!ground && comp) arrow(ctx, f0x, f0y, f0x - Lh, f0y, C.dv, 5, [8, 6]);
+    circ(ctx, f0x, f0y, 4.5, { fill: C.ink });
+    const ra = Math.min(fs * 1.8, Lg * 0.45);
+    if (comp) {
+      const big = th > 14 * DEG; angArc(ctx, f0x, f0y, ra, -Math.PI / 2, -Math.PI / 2 + th, C.ink);
+      rich(ctx, '*θ*', big ? f0x + (ra + fs * 0.6) * Math.cos(-Math.PI / 2 + th / 2) : f0x + ra * tn + fs * 0.75, big ? f0y + (ra + fs * 0.6) * Math.sin(-Math.PI / 2 + th / 2) : f0y - ra, { sz: 0.8, al: 'center', halo: true });
+      if (Lg > fs * 2.6) rich(ctx, '*T* cos *θ*', f0x - fs * 0.5, f0y - Lg * 0.55, { sz: 0.72, c: C.force, al: 'right', halo: true });
+      rich(ctx, '*T* sin *θ*', f0x + fs * 0.55, f0y + fs * 0.95, { sz: 0.72, c: C.force, halo: true });
+    }
+    vecText('T', '', U(sig(T, 3), 'N'), f0x + Lh - fs * 0.3, f0y - Lg - fs * 0.9, C.force);
+    vlab(ctx, 'F', 'g', f0x + fs * 0.6, f0y + Lg * 0.72, { c: C.force, sz: 0.95 });
+    rich(ctx, '= *mg* = ' + U(sig(mg, 3), 'N'), f0x + fs * 0.85 + vlabSize(ctx, 'F', 'g', fs * 0.95).tot, f0y + Lg * 0.72, { sz: 0.8, c: C.force, w: 600, halo: true });
+    if (!ground && comp) {
+      const lx = f0x - Lh - fs * 0.45;
+      vlab(ctx, 'F', 'fictitious', lx, f0y - fs * 0.25, { c: C.dv, sz: 0.95, al: 'right' });
+      rich(ctx, '= *m a* = ' + U(sig(ma, 3), 'N'), lx, f0y + fs * 1.05, { sz: 0.75, c: C.dv, al: 'right', halo: true, w: 600 });
+    }
+    // the sum of the forces: m a for your friend on the ground; zero for you in the truck, where the ball is at rest
+    const wS = Math.max(richW(ctx, 'sum of forces', 0.75, 700), richW(ctx, '= *m a* = 10.0 N', 0.75, 700)) + fs * 0.5;
+    const x0 = flat ? Math.max(B.x + B.w * 0.6, f0x + Math.max(Lg * 1.03, fs * 7.5) + fs * 1.6) : B.x + pad + fs * 0.4, yy = flat ? f0y - fs * 0.9 : f0y + Lg + fs * 2.6;
+    if (x0 + Math.max(Lg * 1.03, wS) < B.x + B.w - pad && yy + fs * 3.4 < B.y + B.h) {
+      circ(ctx, x0, yy, 5, { stroke: C.acc, w: 2 });
+      if (ground && S.a > 1e-6) arrow(ctx, x0, yy, x0 + Lh, yy, C.acc, 5);
+      rich(ctx, 'sum of forces', x0 - 5, yy + fs * 1.15, { sz: 0.75, c: C.acc, w: 700 });
+      rich(ctx, ground && S.a > 1e-6 ? '= *m a* = ' + U(sig(ma, 3), 'N') : '= 0', x0 - 5, yy + fs * 2.1, { sz: 0.75, c: C.acc, w: 700 });
+      if (!ground) txt(ctx, 'the ball is at rest in the truck', x0 - 5, yy + fs * 3.05, { sz: 0.7, c: C.muted });
+    }
+  }
+  function draw() {
+    st.fit(); st.clear(); const { ctx, w, h } = st, fs = C.fs, wide = w > h * 1.6, ground = S.obs === 'ground';
+    const A = wide ? { x: 0, y: 0, w: w * 0.58, h } : { x: 0, y: 0, w, h: h * 0.5 };
+    const B = wide ? { x: w * 0.59, y: fs * 0.8, w: w * 0.41 - fs * 0.6, h: h - fs * 1.6 } : { x: fs * 0.6, y: h * 0.51, w: w - fs * 1.2, h: h * 0.49 - fs * 0.6 };
+    scene(ctx, A, ground, wide); fbd(ctx, B, ground);
+  }
+  refresh();
+  sim.update = update; sim.draw = draw; return sim;
+})();
+
+/* =============== 15. Kepler’s laws =============== */
 SIMS['kepler'] = (function () {
   const root = $('#view-kepler'), st = makeStage($('canvas', root)), O = outs(root);
   const sim = { paused: false, slow: false };
@@ -2334,6 +2798,18 @@ const QC = {
     explain: 'From the ground, the puck simply stays where it was while the table accelerates forward under it. The backward “force” exists only in the train’s accelerating frame.', demo: () => press('train', '[data-act="replay"]') }],
   'turning-car': [{ prompt: 'You are pressed against the right-hand door. Which is true about the horizontal forces on you?', options: ['Only real forces act to the right.', 'Real forces to the right and to the left balance.', 'Only real forces act to the left.', 'None of these.'], answer: 'C',
     explain: 'The only real horizontal force is the door pushing you left, toward the center of the turn. The outward push you seem to feel is fictitious.', demo: () => press('turning-car', '[data-act="play"]') }],
+  'coriolis': [
+    { prompt: 'Seen from above by someone at rest on the ground, what path does the ball follow across the platform?', options: ['A straight line', 'A curve that bends the way the platform turns', 'A curve that bends against the way the platform turns', 'A circle around the center'], answer: 'A',
+      explain: 'Once the ball leaves your hand, no horizontal force acts on it, so it moves in a straight line, as Newton’s first law says. It misses because the platform carries your friend away while the ball is in flight.', demo: () => press('coriolis', '[data-act="throw"]') },
+    { prompt: 'Make the platform turn counterclockwise instead. Seen on the platform, which way does the ball curve?', options: ['To the left of its path', 'To the right of its path', 'It does not curve'], answer: 'B',
+      explain: 'Reversing the rotation reverses the Coriolis force. On a platform turning counterclockwise, like Earth seen from above the North Pole, moving objects veer to the right. That is why hurricanes in the Northern Hemisphere spin counterclockwise.', demo: () => press('coriolis', '[data-seg="dir"] button[data-v="ccw"]') }],
+  'hanging-ball': [
+    { prompt: 'Riding in the truck, you say a fictitious force pushes the ball backward and tilts the string. How large is that force?', options: ['<i>mg</i>', '<i>m a</i>', '<i>T</i>, the tension in the string', 'Zero, because the ball is at rest'], answer: 'B',
+      explain: 'Both observers write <i>T</i> cos <i>θ</i> = <i>mg</i>. Horizontally your friend on the ground writes <i>T</i> sin <i>θ</i> = <i>m a</i>, and you write <i>T</i> sin <i>θ</i> − <i>F</i><sub>fictitious</sub> = 0. The two agree only if <i>F</i><sub>fictitious</sub> = <i>m a</i>.', demo: () => press('hanging-ball', '[data-seg="obs"] button[data-v="truck"]') },
+    { prompt: 'Your friend on the ground wants to measure the truck’s acceleration. What can she do?', options: ['Measure the tension <i>T</i> and use <i>a</i> = ' + FR('<i>T</i>', '<i>m</i>'), 'Measure the angle <i>θ</i> and use <i>a</i> = <i>g</i> tan <i>θ</i>', 'Measure the angle <i>θ</i> and use <i>a</i> = <i>g</i> sin <i>θ</i>', 'Nothing: only someone riding in the truck can measure it'], answer: 'B',
+      explain: 'Divide <i>T</i> sin <i>θ</i> = <i>m a</i> by <i>T</i> cos <i>θ</i> = <i>mg</i> to get tan <i>θ</i> = ' + FR('<i>a</i>', '<i>g</i>') + '. The tension and the mass cancel, so the angle alone gives <i>a</i>: a hanging ball is an accelerometer.', demo: () => press('hanging-ball', '[data-seg="obs"] button[data-v="ground"]') },
+    { prompt: 'On the spinning teacup ride, you hold your phone on a string directly above the center of the cup. What angle does the string make with the vertical?', options: ['0°: it hangs straight down', 'The same angle as near the rim', 'A larger angle than near the rim'], answer: 'A',
+      explain: 'Over the center the phone is not moving in a circle, so it has no centripetal acceleration and the string stays vertical. The farther out you hold it, the larger <i>a</i><sub>c</sub> = <i>rω</i>² and the larger the angle, since tan <i>θ</i> = ' + FR('<i>a</i><sub>c</sub>', '<i>g</i>') + '.' }],
   'gravitation': [
     { prompt: 'Earth pulls on you with a force of 600 N. How hard do you pull on Earth?', options: ['600 N', 'Much less than 600 N', 'Not at all'], answer: 'A',
       explain: 'The two forces are a third-law pair, so they always have the same size. Earth hardly responds because its mass is enormous: its acceleration is only about 10⁻²² m/s².', demo: () => press('gravitation', '[data-seg="pair"] button[data-v="you"]') },
